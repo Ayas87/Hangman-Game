@@ -1,16 +1,20 @@
-var heroName = ['genji','mccree','pharah','reaper','soldier','sombra','tracer','bastion','hanzo','junkrat','mei', 'torbjorn','widowmaker','orisa','reinhardt','roadhog','winston','zarya','ana','lucio','mercy','symmetra','zenyatta']; 
+
+//hero object constructor
 function Hero (heroName, heroAbility1, heroAbility2, heroUlt){
 	this.name  = heroName;
 	this.ability1 = heroAbility1;
 	this.ability2 = heroAbility2;
 	this.ult = heroUlt;
 };
+
+
+
 // heroes
 var genji = new Hero('genji','swift strike','deflect', 'dragonblade');
-var maccree = new Hero('mccree','combat roll','flashbang', 'deadeye');
+var mccree = new Hero('mccree','combat roll','flashbang', 'deadeye');
 var pharah = new Hero('pharah','jump jet','concussive blast', 'barrage');
 var reaper = new Hero('reaper','wraith form','shadow step', 'death blossom');
-var solider = new Hero('soldier: 76','sprint','biotic field', 'tactical visor');
+var soldier = new Hero('soldier: 76','sprint','biotic field', 'tactical visor');
 var sombra = new Hero('sombra','thermoptic camo','translocator', 'emp');
 var tracer = new Hero('tracer','blink','recall', 'pulse bomb');
 var bastion = new Hero('bastion','reconfigure','self-repair', 'configuration: tank');
@@ -29,18 +33,33 @@ var lucio = new Hero('lucio','crossfade','amp it up', 'sound barrier');
 var mercy = new Hero('mercy','guardian angel','angelic decentr', 'ressurect');
 var symmetra = new Hero('symmetra','sentry turret','photon barrier', 'teleporter');
 var zenyatta = new Hero('zenyatta','orb of harmony','orb of discord', 'transcendence');
-
-var randomWord = function() {
-	var randomCalc = Math.floor(Math.random * heroName.length);
-	var randomCalc2 = Math.floor(Math.random + 1);
+var heroName = [genji,reaper]
+// [genji, mccree, pharah, reaper, soldier, sombra, tracer, bastion, hanzo, junkrat, mei, torbjorn, widowmaker, orisa, reinhardt, roadhog, winston, zarya, ana, lucio, mercy, symmetra, zenyatta]; 
+var guesses = [];
+//random ability string
+function randomAbility () {
+	var randomCalc = Math.floor(Math.random() * heroName.length);
+	var randomCalc2 = Math.floor(Math.random() * 2) +1;
 	var randomHero = heroName[randomCalc];
-	var randomAbility = randomHero[randomCalc2];
+	var randomAbility1 = 1;
+	var randomAbility2 = 2;
+	console.log(randomHero);
+	console.log(randomCalc2);
+	if (randomCalc2 === 1) {
+		console.log(randomHero.ability1);
+	} else {
+		console.log(randomHero.ability2);
+	}
+	
 };
 
-
-
-var buttonPress = document.getElementById("buttonPress");
-document.onkeyup = function(event) {
+//user input/guesses
+document.onkeypress = function(event) {
+	var buttonPress = document.getElementById("buttonPress");
 	var userGuess = event.key.toLowerCase();
-	buttonPress.textContent = userGuess;
+	if(userGuess.match(/[a-z]/i) && guesses.indexOf(userGuess) == -1) {
+		guesses.push(userGuess);
+		buttonPress.textContent = guesses;
+		console.log(guesses);
+	};
 };
