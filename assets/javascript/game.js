@@ -4,7 +4,7 @@ function Hero(heroName, heroAbility1, heroAbility2, heroUlt) {
     this.ability1 = heroAbility1;
     this.ability2 = heroAbility2;
     this.ult = heroUlt;
-};
+}
 // heroes
 var genji = new Hero('genji', 'swift_strike', 'deflect', 'dragonblade');
 var mccree = new Hero('mccree', 'combat_roll', 'flashbang', 'deadeye');
@@ -36,51 +36,47 @@ var guesses = [];
 var correctWord = [];
 var incorrectGuess = [];
 var randomWord = [];
-var userGuess = document.getElementById("userGuess");
-
-
 //assign keyPress variable
 document.onkeypress = function(event) {
     var keyPress = event.key.toLowerCase();
     console.log(keyPress);
     gameLogic(keyPress);
-};
+}
+// determines if the keypress is correct or incorrect
 // determines if the keypress is correct or incorrect
 function gameLogic(keyPress) {
-    console.log(correctWord);
-    for (i = 0; i > randomWord.length; i++) {
-        if (randomWord[i] == keyPress) {
-            correctWord.push(randomWord[i]);
-            console.log(correctWord);
+    for (i = 0; i < randomWord.length; i++) {
+        if (randomWord[i] == keyPress && keyPress.match(/[a-z]/)) {
+            console.log('game logic is working, ' + keyPress + ' was pressed');
+            thatbox = document.getElementsByClassName('class_' + keyPress);
+                    for(p = 0; p < thatbox.length; p++) {
+                        thatbox[p].innerHTML = keyPress;
+                    }
+                      correctWord.push(keyPress);
+                      guesses.push(keyPress);
         } else {
             incorrectGuess.push(keyPress);
-            console.log(incorrectGuess);
         }
     }
-};
+}
 //creates boxes
 function blankBox(){
-    console.log('blankBox is being called');
-    console.log(randomWord + ' is the random word')
     var main = document.getElementById('random-word');
-	main.innerHTML = "";
+	main.innerHTML = ""; //clears blank boxes
     for(j=0; j < randomWord.length; j++) {
-        console.log('blankBox is looping ' + j + 'x');
         if (randomWord[j].match(/[a-z]/)) {
         blank = document.createElement('span');
-        blank.innerHTML = '_';
+        blank.innerHTML = '*';
         blank.className='class_' + randomWord[j];
         main.appendChild(blank);
         } else {
         blank = document.createElement('span');
-        blank.innerHTML = ' ';
+        blank.innerHTML = '&nbsp;';
         blank.className='class_' + randomWord[j];
         main.appendChild(blank);
         }
     }
 };
-
-
 //page loads with random word(ability)
 function randomAbilityLoad() {
     var randomHeroCalc = Math.floor(Math.random() * heroName.length);
@@ -91,10 +87,8 @@ function randomAbilityLoad() {
     } else {
         randomWord = randomHero.ability2.split('');
     };
+    blankBox();
 };
-randomAbilityLoad();
-blankBox();
-
 //generates a random word(ability) on click
 document.getElementById('start').onclick = function randomAbility() {
     var randomHeroCalc = Math.floor(Math.random() * heroName.length);
@@ -107,3 +101,5 @@ document.getElementById('start').onclick = function randomAbility() {
     };
    blankBox();
 };
+randomAbilityLoad();
+console.log(randomWord);
