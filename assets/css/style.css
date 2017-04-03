@@ -1,4 +1,5 @@
-.a, .b, .c, .e, .f, .g, .h, .i, .j, .k, .l, .m, .n, .o, .p, .q, .r, .s, .t, .u, .v, .w, .x, .y, .z {
+.class_a, .class_b, .class_c, .class_e, .class_f, .class_g, .class_h, .class_i, .class_j, .class_k, .class_l, .class_m, .class_n, .class_o, .class_p, .class_q, .class_r, .class_s, .class_t, .class_u, .class_v, .class_w, .class_x, .class_y, .class_z {
+	display: initial;
 	padding: 3px;
 	width: 10px;
-}
+};

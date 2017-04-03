@@ -6,29 +6,29 @@ function Hero(heroName, heroAbility1, heroAbility2, heroUlt) {
     this.ult = heroUlt;
 };
 // heroes
-var genji = new Hero('genji', 'swift strike', 'deflect', 'dragonblade');
-var mccree = new Hero('mccree', 'combat roll', 'flashbang', 'deadeye');
-var pharah = new Hero('pharah', 'jump jet', 'concussive blast', 'barrage');
-var reaper = new Hero('reaper', 'wraith form', 'shadow step', 'death blossom');
-var soldier = new Hero('soldier: 76', 'sprint', 'biotic field', 'tactical visor');
-var sombra = new Hero('sombra', 'thermoptic camo', 'translocator', 'emp');
-var tracer = new Hero('tracer', 'blink', 'recall', 'pulse bomb');
-var bastion = new Hero('bastion', 'reconfigure', 'self repair', 'configuration: tank');
-var hanzo = new Hero('hanzo', 'sonic arrow', 'scatter arrow', 'dragonstrike');
-var junkrat = new Hero('junkrat', 'concussion mine', 'steel trap', 'rip tire');
-var mei = new Hero('mei', 'cryo freeze', 'ice wall', 'blizzard');
-var torbjorn = new Hero('torbjorn', 'build turret', 'armor pack', 'molten core');
+var genji = new Hero('genji', 'swift_strike', 'deflect', 'dragonblade');
+var mccree = new Hero('mccree', 'combat_roll', 'flashbang', 'deadeye');
+var pharah = new Hero('pharah', 'jump_jet', 'concussive_blast', 'barrage');
+var reaper = new Hero('reaper', 'wraith_form', 'shadow_step', 'death_blossom');
+var soldier = new Hero('soldier: 76', 'sprint', 'biotic_field', 'tactical_visor');
+var sombra = new Hero('sombra', 'thermoptic_camo', 'translocator', 'emp');
+var tracer = new Hero('tracer', 'blink', 'recall', 'pulse_bomb');
+var bastion = new Hero('bastion', 'reconfigure', 'self_repair', 'configuration_tank');
+var hanzo = new Hero('hanzo', 'sonic_arrow', 'scatter_arrow', 'dragonstrike');
+var junkrat = new Hero('junkrat', 'concussion_mine', 'steel_trap', 'rip_tire');
+var mei = new Hero('mei', 'cryo_freeze', 'ice_wall', 'blizzard');
+var torbjorn = new Hero('torbjorn', 'build_turret', 'armor_pack', 'molten_core');
 var widowmaker = new Hero('widowmaker', 'grappling hook', 'venom mine', 'infra sight');
-var orisa = new Hero('orisa', 'fortify', 'protective barrier', 'supercharger');
-var reinhardt = new Hero('reinhardt', 'charge', 'fire strike', 'earthshatter');
-var roadhog = new Hero('roadhog', 'take a breather', 'chain hook', 'whole hog');
-var winston = new Hero('winston', 'jump pack', 'barrier projector', 'primal rage');
-var zarya = new Hero('zarya', 'partical barrier', 'projected barrier', 'graviton surge');
-var ana = new Hero('ana', 'sleep dart', 'biotic grenade', 'nano boost');
-var lucio = new Hero('lucio', 'crossfade', 'amp it up', 'sound barrier');
-var mercy = new Hero('mercy', 'guardian angel', 'angelic decentr', 'ressurect');
-var symmetra = new Hero('symmetra', 'sentry turret', 'photon barrier', 'teleporter');
-var zenyatta = new Hero('zenyatta', 'orb of harmony', 'orb of discord', 'transcendence');
+var orisa = new Hero('orisa', 'fortify', 'protective_barrier', 'supercharger');
+var reinhardt = new Hero('reinhardt', 'charge', 'fire_strike', 'earthshatter');
+var roadhog = new Hero('roadhog', 'take_a_breather', 'chain_hook', 'whole_hog');
+var winston = new Hero('winston', 'jump pack', 'barrier projector', 'primal_rage');
+var zarya = new Hero('zarya', 'partical_barrier', 'projected_barrier', 'graviton_surge');
+var ana = new Hero('ana', 'sleep_dart', 'biotic_grenade', 'nano_boost');
+var lucio = new Hero('lucio', 'crossfade', 'amp_it_up', 'sound_barrier');
+var mercy = new Hero('mercy', 'guardian_angel', 'angelic_decentr', 'ressurect');
+var symmetra = new Hero('symmetra', 'sentry_turret', 'photon_barrier', 'teleporter');
+var zenyatta = new Hero('zenyatta', 'orb_of_harmony', 'orb_of_discord', 'transcendence');
 var heroName = [genji, mccree, pharah, reaper, soldier, sombra, tracer, bastion, hanzo, junkrat, mei, torbjorn, widowmaker, orisa, reinhardt, roadhog, winston, zarya, ana, lucio, mercy, symmetra, zenyatta];
 // other variables
 var keyPress;
@@ -63,15 +63,23 @@ function blankBox(){
     console.log('blankBox is being called');
     console.log(randomWord + ' is the random word')
     var main = document.getElementById('random-word');
-  main.innerHTML = "";
-    for(j=0; j < randomWord.length; j++){
+	main.innerHTML = "";
+    for(j=0; j < randomWord.length; j++) {
         console.log('blankBox is looping ' + j + 'x');
+        if (randomWord[j].match(/[a-z]/)) {
         blank = document.createElement('span');
         blank.innerHTML = '_';
-        blank.className=randomWord[j];
+        blank.className='class_' + randomWord[j];
         main.appendChild(blank);
+        } else {
+        blank = document.createElement('span');
+        blank.innerHTML = ' ';
+        blank.className='class_' + randomWord[j];
+        main.appendChild(blank);
+        }
     }
 };
+
 
 //page loads with random word(ability)
 function randomAbilityLoad() {
