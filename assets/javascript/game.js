@@ -32,30 +32,39 @@ var zenyatta = new Hero('zenyatta', 'orb_of_harmony', 'orb_of_discord', 'transce
 var heroName = [genji, mccree, pharah, reaper, soldier, sombra, tracer, bastion, hanzo, junkrat, mei, torbjorn, widowmaker, orisa, reinhardt, roadhog, winston, zarya, ana, lucio, mercy, symmetra, zenyatta];
 // other variables
 var keyPress;
-var guesses = [];
+var displayGuess = [];
 var correctWord = [];
 var incorrectGuess = [];
 var randomWord = [];
 //assign keyPress variable
 document.onkeypress = function(event) {
     var keyPress = event.key.toLowerCase();
-    console.log(keyPress);
     gameLogic(keyPress);
 }
-// determines if the keypress is correct or incorrect
+// incorrectGuess filter
+function filter (keyPress) {
+    for (x=0; x < incorrectGuess; x++) {
+        console.log('test1');
+        if(correctWord.indexOf(incorrectGuess[x]) == -1) {
+            console.log('test2');
+            displayGuess.push(incorrectGuess[x]);
+        }
+    }
+}
 // determines if the keypress is correct or incorrect
 function gameLogic(keyPress) {
     for (i = 0; i < randomWord.length; i++) {
         if (randomWord[i] == keyPress && keyPress.match(/[a-z]/)) {
-            console.log('game logic is working, ' + keyPress + ' was pressed');
             thatbox = document.getElementsByClassName('class_' + keyPress);
                     for(p = 0; p < thatbox.length; p++) {
                         thatbox[p].innerHTML = keyPress;
                     }
                       correctWord.push(keyPress);
-                      guesses.push(keyPress);
-        } else {
-            incorrectGuess.push(keyPress);
+        } else if (keyPress.match(/[a-z]/) && incorrectGuess.indexOf(keyPress) == -1){
+            // incorrectGuess.push(keyPress);
+            var userGuess = document.getElementById('userGuess');
+            userGuess.textContent = displayGuess.join();
+            filter(keyPress);
         }
     }
 }
