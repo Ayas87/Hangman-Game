@@ -1,10 +1,10 @@
-//hero object constructor
-function Hero(heroName, heroAbility1, heroAbility2, heroUlt) {
-    this.name = heroName;
-    this.ability1 = heroAbility1;
-    this.ability2 = heroAbility2;
-    this.ult = heroUlt;
-}
+// other variables
+var keyPress;
+var displayGuess = [];
+var correctWord = [];
+var incorrectGuess = [];
+var randomWord = [];
+var lives = 7;
 // heroes
 var genji = new Hero('genji', 'swift_strike', 'deflect', 'dragonblade');
 var mccree = new Hero('mccree', 'combat_roll', 'flashbang', 'deadeye');
@@ -30,62 +30,15 @@ var mercy = new Hero('mercy', 'guardian_angel', 'angelic_decentr', 'ressurect');
 var symmetra = new Hero('symmetra', 'sentry_turret', 'photon_barrier', 'teleporter');
 var zenyatta = new Hero('zenyatta', 'orb_of_harmony', 'orb_of_discord', 'transcendence');
 var heroName = [genji, mccree, pharah, reaper, soldier, sombra, tracer, bastion, hanzo, junkrat, mei, torbjorn, widowmaker, orisa, reinhardt, roadhog, winston, zarya, ana, lucio, mercy, symmetra, zenyatta];
-// other variables
-var keyPress;
-var displayGuess = [];
-var correctWord = [];
-var incorrectGuess = [];
-var randomWord = [];
-//assign keyPress variable
-document.onkeypress = function(event) {
-    var keyPress = event.key.toLowerCase();
-    gameLogic(keyPress);
+//calls random ability to start game with an random word
+randomAbilityLoad();
+//hero object constructor
+function Hero(heroName, heroAbility1, heroAbility2, heroUlt) {
+    this.name = heroName;
+    this.ability1 = heroAbility1;
+    this.ability2 = heroAbility2;
+    this.ult = heroUlt;
 }
-// incorrectGuess filter
-function filter (keyPress) {
-    for (x=0; x < incorrectGuess; x++) {
-        console.log('test1');
-        if(correctWord.indexOf(incorrectGuess[x]) == -1) {
-            console.log('test2');
-            displayGuess.push(incorrectGuess[x]);
-        }
-    }
-}
-// determines if the keypress is correct or incorrect
-function gameLogic(keyPress) {
-    for (i = 0; i < randomWord.length; i++) {
-        if (randomWord[i] == keyPress && keyPress.match(/[a-z]/)) {
-            thatbox = document.getElementsByClassName('class_' + keyPress);
-                    for(p = 0; p < thatbox.length; p++) {
-                        thatbox[p].innerHTML = keyPress;
-                    }
-                      correctWord.push(keyPress);
-        } else if (keyPress.match(/[a-z]/) && incorrectGuess.indexOf(keyPress) == -1){
-            // incorrectGuess.push(keyPress);
-            var userGuess = document.getElementById('userGuess');
-            userGuess.textContent = displayGuess.join();
-            filter(keyPress);
-        }
-    }
-}
-//creates boxes
-function blankBox(){
-    var main = document.getElementById('random-word');
-	main.innerHTML = ""; //clears blank boxes
-    for(j=0; j < randomWord.length; j++) {
-        if (randomWord[j].match(/[a-z]/)) {
-        blank = document.createElement('span');
-        blank.innerHTML = '*';
-        blank.className='class_' + randomWord[j];
-        main.appendChild(blank);
-        } else {
-        blank = document.createElement('span');
-        blank.innerHTML = '&nbsp;';
-        blank.className='class_' + randomWord[j];
-        main.appendChild(blank);
-        }
-    }
-};
 //page loads with random word(ability)
 function randomAbilityLoad() {
     var randomHeroCalc = Math.floor(Math.random() * heroName.length);
@@ -108,7 +61,62 @@ document.getElementById('start').onclick = function randomAbility() {
     } else {
         randomWord = randomHero.ability2.split('');
     };
-   blankBox();
+    blankBox();
 };
-randomAbilityLoad();
+
+//creates boxes
+function blankBox() {
+    var main = document.getElementById('random-word');
+    main.innerHTML = ""; //clears blank boxes
+    for (j = 0; j < randomWord.length; j++) {
+        if (randomWord[j].match(/[a-z]/)) {
+            blank = document.createElement('span');
+            blank.innerHTML = '*';
+            blank.className = 'class_' + randomWord[j];
+            main.appendChild(blank);
+        } else {
+            blank = document.createElement('span');
+            blank.innerHTML = '&nbsp;';
+            blank.className = 'class_' + randomWord[j];
+            main.appendChild(blank);
+        }
+    }
+};
 console.log(randomWord);
+//assign keyPress variable
+document.onkeypress = function(event) {
+        var keyPress = event.key.toLowerCase();
+        gameLogic(keyPress);
+    }
+// incorrectGuess filter used to determine if keypress is incorrect
+function filter() {
+    for (x = 0; x < incorrectGuess.length; x++) {
+        if (correctWord.indexOf(incorrectGuess[x]) == -1) {
+            displayGuess.push(incorrectGuess[x]);
+        }
+    }
+}
+// determines if the keypress is correct or incorrect
+function gameLogic(keyPress) {
+    for (i = 0; i < randomWord.length; i++) {
+        if (randomWord[i] == keyPress && keyPress.match(/[a-z]/)) {
+            thatbox = document.getElementsByClassName('class_' + keyPress);
+            for (p = 0; p < thatbox.length; p++) {
+                thatbox[p].innerHTML = keyPress;
+            }
+            correctWord.push(keyPress);
+        } else if (keyPress.match(/[a-z]/) && incorrectGuess.indexOf(keyPress) == -1) {
+            incorrectGuess.push(keyPress);
+            console.log(incorrectGuess);
+            for (x = 0; x < incorrectGuess.length; x++) {
+                if (correctWord.indexOf(incorrectGuess[x]) == -1) {
+                    displayGuess.push(incorrectGuess[x]);
+                }
+            }
+            var userGuess = document.getElementById('userGuess');
+            userGuess.textContent = displayGuess.join();
+        }
+    }
+}
+
+
