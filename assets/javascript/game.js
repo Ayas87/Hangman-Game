@@ -5,6 +5,9 @@ var correctWord = [];
 var incorrectGuess = [];
 var randomWord = [];
 var lives = 7;
+var winCounter = 0;
+var lastArray = [];
+var userGuess = document.getElementById('userGuess');
 // heroes
 var genji = new Hero('genji', 'swift_strike', 'deflect', 'dragonblade');
 var mccree = new Hero('mccree', 'combat_roll', 'flashbang', 'deadeye');
@@ -82,41 +85,48 @@ function blankBox() {
         }
     }
 };
-console.log(randomWord);
 //assign keyPress variable
 document.onkeypress = function(event) {
         var keyPress = event.key.toLowerCase();
         gameLogic(keyPress);
     }
 // incorrectGuess filter used to determine if keypress is incorrect
-function filter() {
-    for (x = 0; x < incorrectGuess.length; x++) {
-        if (correctWord.indexOf(incorrectGuess[x]) == -1) {
-            displayGuess.push(incorrectGuess[x]);
-        }
+function filter(keyPress) {
+  for (g = 0; g < incorrectGuess.length; g++) {
+    if(correctWord.indexOf(incorrectGuess[g]) == -1 && lastArray.indexOf(incorrectGuess[g]) == -1) {
+      lastArray.push(incorrectGuess[g]);
+      lives --;
     }
+  }  
 }
 // determines if the keypress is correct or incorrect
 function gameLogic(keyPress) {
-    for (i = 0; i < randomWord.length; i++) {
-        if (randomWord[i] == keyPress && keyPress.match(/[a-z]/)) {
-            thatbox = document.getElementsByClassName('class_' + keyPress);
-            for (p = 0; p < thatbox.length; p++) {
-                thatbox[p].innerHTML = keyPress;
-            }
-            correctWord.push(keyPress);
-        } else if (keyPress.match(/[a-z]/) && incorrectGuess.indexOf(keyPress) == -1) {
-            incorrectGuess.push(keyPress);
-            console.log(incorrectGuess);
-            for (x = 0; x < incorrectGuess.length; x++) {
-                if (correctWord.indexOf(incorrectGuess[x]) == -1) {
-                    displayGuess.push(incorrectGuess[x]);
-                }
-            }
-            var userGuess = document.getElementById('userGuess');
-            userGuess.textContent = displayGuess.join();
-        }
-    }
+  for (i = 0; i < randomWord.length; i++) {
+      if (randomWord[i] == keyPress && keyPress.match(/[a-z]/) && correctWord.indexOf(keyPress) == -1) {
+          thatbox = document.getElementsByClassName('class_' + keyPress);
+          for (p = 0; p < thatbox.length; p++) {
+              thatbox[p].innerHTML = keyPress;
+          }
+          correctWord.push(keyPress);
+          winCounter ++;
+      } else if (keyPress.match(/[a-z]/) && incorrectGuess.indexOf(keyPress) == -1) {
+          incorrectGuess.push(keyPress);
+      }
+  }
+  filter();
+  winCondition();
+ userGuess.textContent = lastArray;
+ console.log('counter: ' + winCounter);
+ console.log('lives: ' + lives);
+ //add textContent to show lives.
 }
-
+ console.log(randomWord);
+ function winCondition(){
+    if(lives < 1) {
+     console.log('YOU LOSE');
+    };
+    if(winCounter == randomWord.length){
+        console.log('YOU WIN');
+    };
+}
 
