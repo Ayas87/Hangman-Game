@@ -104,11 +104,12 @@ function gameLogic(keyPress) {
   for (i = 0; i < randomWord.length; i++) {
       if (randomWord[i] == keyPress && keyPress.match(/[a-z]/) && correctWord.indexOf(keyPress) == -1) {
           thatbox = document.getElementsByClassName('class_' + keyPress);
+          winCounter ++;
           for (p = 0; p < thatbox.length; p++) {
               thatbox[p].innerHTML = keyPress;
           }
           correctWord.push(keyPress);
-          winCounter ++;
+          
       } else if (keyPress.match(/[a-z]/) && incorrectGuess.indexOf(keyPress) == -1) {
           incorrectGuess.push(keyPress);
       }
@@ -123,10 +124,10 @@ function gameLogic(keyPress) {
  console.log(randomWord);
  function winCondition(){
     if(lives < 1) {
-     console.log('YOU LOSE');
+     alert('YOU LOSE');
     };
     if(winCounter == randomWord.length){
-        console.log('YOU WIN');
+        alert('YOU WIN');
     };
 }
 
