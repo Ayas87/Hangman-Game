@@ -1,5 +1,35 @@
-.class_* {
-	margin: 5px;
-	width: 10px;
+body {
+	background-color: pink;
+	color: white;
+	font-size: 40px;
 };
+.ow-icon {
+	float:left;
+	display: inline-block;
+};
+.dva-icon {
+	display: block;
+	text-align: center;
+}
+.header-title {
+	text-align: center;
+	display: inline-block;
+	width: 100%;
+	margin: 0px;
+};
+.dva-bg {
+	background-color: black;
+	padding: 10px;
+};
+.static-text {
+	font-size: 20px;
+};
+.random-word {
+	margin: 10px;
 
+};
+.class_a, .class_b, .class_c, .class_d, .class_e, .class_f, .class_g, .class_h, .class_i, .class_j, .class_k, .class_l, .class_m, .class_n, .class_o, .class_p, .class_q, .class_r, .class_s, .class_t, .class_u, .class_v, .class_w, .class_x, .class_y, .class_z {
+  	margin: 5px;
+  	width: 10px;
+  	
+}; 
