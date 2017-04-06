@@ -1,13 +1,17 @@
 // other variables
 var keyPress;
-var displayGuess = [];
 var correctWord = [];
 var incorrectGuess = [];
 var randomWord = [];
 var lives = 7;
-var winCounter = 0;
+var wins = 0;
+var victory = 0
 var lastArray = [];
 var userGuess = document.getElementById('userGuess');
+var livesLeft = document.getElementById('lives-remaining');
+var winsCounter = document.getElementById('win-counter');
+var displayRandomWord = document.getElementById('random-word');
+var displayLastWord = document.getElementById('last-word');
 // heroes
 var genji = new Hero('genji', 'swift_strike', 'deflect', 'dragonblade');
 var mccree = new Hero('mccree', 'combat_roll', 'flashbang', 'deadeye');
@@ -29,12 +33,13 @@ var winston = new Hero('winston', 'jump pack', 'barrier projector', 'primal_rage
 var zarya = new Hero('zarya', 'partical_barrier', 'projected_barrier', 'graviton_surge');
 var ana = new Hero('ana', 'sleep_dart', 'biotic_grenade', 'nano_boost');
 var lucio = new Hero('lucio', 'crossfade', 'amp_it_up', 'sound_barrier');
-var mercy = new Hero('mercy', 'guardian_angel', 'angelic_decentr', 'ressurect');
+var mercy = new Hero('mercy', 'guardian_angel', 'angelic_decent', 'ressurect');
 var symmetra = new Hero('symmetra', 'sentry_turret', 'photon_barrier', 'teleporter');
 var zenyatta = new Hero('zenyatta', 'orb_of_harmony', 'orb_of_discord', 'transcendence');
 var heroName = [genji, mccree, pharah, reaper, soldier, sombra, tracer, bastion, hanzo, junkrat, mei, torbjorn, widowmaker, orisa, reinhardt, roadhog, winston, zarya, ana, lucio, mercy, symmetra, zenyatta];
 //calls random ability to start game with an random word
 randomAbilityLoad();
+reset();
 //hero object constructor
 function Hero(heroName, heroAbility1, heroAbility2, heroUlt) {
     this.name = heroName;
@@ -46,7 +51,7 @@ function Hero(heroName, heroAbility1, heroAbility2, heroUlt) {
 function randomAbilityLoad() {
     var randomHeroCalc = Math.floor(Math.random() * heroName.length);
     var randomAbilityCalc = Math.floor(Math.random() * 2) + 1;
-    var randomHero = heroName[randomHeroCalc];
+    var randomHero = heroName[randomHeroCalc];   
     if (randomAbilityCalc === 1) {
         randomWord = (randomHero.ability1.split(''));
     } else {
@@ -55,10 +60,12 @@ function randomAbilityLoad() {
     blankBox();
 };
 //generates a random word(ability) on click
-document.getElementById('start').onclick = function randomAbility() {
+document.getElementById('restart').onclick = function randomAbility() {
     var randomHeroCalc = Math.floor(Math.random() * heroName.length);
     var randomAbilityCalc = Math.floor(Math.random() * 2) + 1;
     var randomHero = heroName[randomHeroCalc];
+    wins = 0;
+    reset();
     if (randomAbilityCalc === 1) {
         randomWord = (randomHero.ability1.split(''));
     } else {
@@ -66,22 +73,22 @@ document.getElementById('start').onclick = function randomAbility() {
     };
     blankBox();
 };
-
 //creates boxes
-function blankBox() {
-    var main = document.getElementById('random-word');
-    main.innerHTML = ""; //clears blank boxes
+function blankBox() {  
+    victory = 0;
+    displayRandomWord.innerHTML = ""; //clears blank boxes
     for (j = 0; j < randomWord.length; j++) {
         if (randomWord[j].match(/[a-z]/)) {
             blank = document.createElement('span');
             blank.innerHTML = '*';
             blank.className = 'class_' + randomWord[j];
-            main.appendChild(blank);
+            displayRandomWord.appendChild(blank);
         } else {
             blank = document.createElement('span');
             blank.innerHTML = '&nbsp;';
             blank.className = 'class_' + randomWord[j];
-            main.appendChild(blank);
+            displayRandomWord.appendChild(blank);
+            victory ++;
         }
     }
 };
@@ -96,17 +103,48 @@ function filter(keyPress) {
     if(correctWord.indexOf(incorrectGuess[g]) == -1 && lastArray.indexOf(incorrectGuess[g]) == -1) {
       lastArray.push(incorrectGuess[g]);
       lives --;
+      livesLeft.innerHTML = lives;
+      winsCounter.innerHTML = wins;
     }
   }  
+}
+//resets game
+function reset () {
+  lives = 7;
+  
+  incorrectGuess = [];
+  lastArray = [];
+  correctWord = [];
+  userGuess.innerHTML = '(Press any key to guess)!';
+  livesLeft.innerHTML = lives;
+  winsCounter.innerHTML = wins;
+}
+//sets win/loss conditions
+function winCondition(){
+    if(lives === 0) {
+      wins = 0;
+      displayLastWord.textContent = 'Your word was: ' + randomWord.join("");
+      alert('YOU LOSE');
+      reset();
+      randomAbilityLoad();
+    };
+    if(victory >= randomWord.length){
+      displayLastWord.textContent = 'The last word was: ' + randomWord.join("");
+      wins ++;
+      reset();
+      randomAbilityLoad();
+      alert('YOU WIN');
+    };
 }
 // determines if the keypress is correct or incorrect
 function gameLogic(keyPress) {
   for (i = 0; i < randomWord.length; i++) {
       if (randomWord[i] == keyPress && keyPress.match(/[a-z]/) && correctWord.indexOf(keyPress) == -1) {
+          
           thatbox = document.getElementsByClassName('class_' + keyPress);
-          winCounter ++;
           for (p = 0; p < thatbox.length; p++) {
               thatbox[p].innerHTML = keyPress;
+              victory ++;
           }
           correctWord.push(keyPress);
           
@@ -117,17 +155,4 @@ function gameLogic(keyPress) {
   filter();
   winCondition();
  userGuess.textContent = lastArray;
- console.log('counter: ' + winCounter);
- console.log('lives: ' + lives);
- //add textContent to show lives.
 }
- console.log(randomWord);
- function winCondition(){
-    if(lives < 1) {
-     alert('YOU LOSE');
-    };
-    if(winCounter == randomWord.length){
-        alert('YOU WIN');
-    };
-}
-

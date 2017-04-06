@@ -9,11 +9,14 @@
 
 <body>
     
-        <button type='button' class='btn btn-danger' id='start'>Click here to play!</button>
+        <button type='button' class='btn btn-danger' id='restart'>Click here to restart!</button>
         <h1>Your word is: <span id='random-word'></span></h1>
+        <h1><span id='last-word'></span></h1>
         <h1 id='correct-guess'></h1>
-    <div id='main'>
-        <h1>Your guesses: <span id="userGuess">(guess a letter)</span></h1>
+    <div>
+        <h1>Your guesses: <span id="userGuess">(Press any key to guess!)</span></h1>
+        <h2>Lives Remaining: <span id='lives-remaining'>7</span></h2>
+        <h2>Wins: <span id='win-counter'>0</span></h2>
     </div>
     <script src="assets/javascript/game.js"></script>
 </body>
