@@ -123,7 +123,7 @@ function winCondition(){
     if(lives === 0) {
       wins = 0;
       displayLastWord.textContent = 'Your word was: ' + randomWord.join("");
-      alert('YOU LOSE');
+      alert('You lose! Your word was: ' + randomWord.join(""));
       reset();
       randomAbilityLoad();
     };
@@ -132,7 +132,7 @@ function winCondition(){
       wins ++;
       reset();
       randomAbilityLoad();
-      alert('YOU WIN');
+      alert('You Win! Get ready for the next word!');
     };
 }
 // determines if the keypress is correct or incorrect
@@ -153,5 +153,5 @@ function gameLogic(keyPress) {
   }
   filter();
   winCondition();
- userGuess.textContent = lastArray;
+ userGuess.textContent = lastArray.join(' ');
 }

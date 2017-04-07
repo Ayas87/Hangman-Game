@@ -6,26 +6,9 @@ body {
  	height: 100%;
  	color: orange;
 }
-.container-fluid {
-	height: 100%;
-	padding: 0px;
-	background: url('../images/maps/dorado.jpg') no-repeat center fixed;
-}
-.container {
-	height: auto;
-}
-#dva-bg {
-	background: url('../images/full-portrait.png');
-	background-size: contain; 
-	background-repeat: no-repeat;
-	background-position: center;
-}
 /*navbar*/
-.navbar {
-	margin-bottom: 0px;
-}
 .navbar-inverse {
-	margin-bottom: 0px;
+	margin-bottom: 30px;
 }
 .ow-icon {
 	float: left;
@@ -41,25 +24,55 @@ body {
 	display: inline-block;
 }
 /*end navbar*/
+/*start body*/
+.container-fluid {
+	height: 100%;
+	padding: 0px;
+	background: url('../images/maps/dorado.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.container {
+	height: auto;
+}
+#dva-bg {
+	margin-top: 100px;
+	background: url('../images/full-portrait.png');
+	background-size: contain; 
+	background-repeat: no-repeat;
+	background-position: right;
+	z-index: 1;
+}
+.game-bg {
+	background-color: rgba(0,0,0,0.5);
+	padding: 30px;
+	border-radius: 25px;
+}
 .static-text {
-	font-size: 20px;
+	font-size: 30px;
+	padding: 30px;
 }
 .random-word {
 	margin: 10px;
-
+}
+.lives-spacing {
+	margin-top: 200px;
+	background-color: rgba(0,0,0,0.5);
+	padding: 30px;
+	border-radius: 25px;
 }
 .class_a, .class_b, .class_c, .class_d, .class_e, .class_f, .class_g, .class_h, .class_i, .class_j, .class_k, .class_l, .class_m, .class_n, .class_o, .class_p, .class_q, .class_r, .class_s, .class_t, .class_u, .class_v, .class_w, .class_x, .class_y, .class_z {
-  	margin: 5px;
-  	width: 10px;
+  	width: auto;
+  	padding: 10px;
 }
-/*footer*/
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 100px;
-  background-color: pink;
-  text-align: center;
-  padding: 30px;
+.win-color {
+	color: lightgreen;
+	font-weight: 700;
 }
-/*end footer*/
+.lives-color {
+	color: red;
+	font-weight: 700;
+}
+/*end body
+*//*footer*/
