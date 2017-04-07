@@ -4,13 +4,15 @@ html {
 }
 body {
  	height: 100%;
- 	margin-bottom: 100px;
  	color: orange;
 }
 .container-fluid {
 	height: 100%;
 	padding: 0px;
 	background: url('../images/maps/dorado.jpg') no-repeat center fixed;
+}
+.container {
+	height: auto;
 }
 #dva-bg {
 	background: url('../images/full-portrait.png');

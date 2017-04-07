@@ -111,7 +111,6 @@ function filter(keyPress) {
 //resets game
 function reset () {
   lives = 7;
-  
   incorrectGuess = [];
   lastArray = [];
   correctWord = [];
