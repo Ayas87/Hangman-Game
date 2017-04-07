@@ -1,45 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Overwatch Hangman</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse">
-        <h1 class='header-title'><img alt="Overwatch Icon" src="assets/images/ow-icon.png" class='ow-icon'><span class='header-title'>Hangman: D.Va Edition</span><img alt="D.Va Icon" src="assets/images/icon-portrait.png" class='dva-icon'></h1>
-    </nav>
-
-        <div class='container dva-bg'>
+    <div class='container-fluid'>
+        <!--Start of Navbar -->
+        <nav class="navbar navbar-inverse">
+            <div class='navcontainer'>
+                <h1 class='text-center header-title'><img alt="Overwatch Icon" src="assets/images/ow-icon.png" class='ow-icon'>Hangman: D.Va Edition<img alt="D.Va Icon" src="assets/images/icon-portrait.png" class='dva-icon'></h1>
+            </div>
+        </nav>
+        <!--End of Navbar-->
+        <!--Start of game-->
+        <div class='container' id='dva-bg'>
             <div class='row'>
                 <div class='col-lg-12'>
-                    <div class='row'>
-                        <div class='col-lg-6'>
-                            <div class='static-text'>
-                                <p>Your word is: </p>
-                                <br>
-                                <span id='random-word'></span></div>
-                        </div>
-                        <div class='col-lg-6'>
-                            <div class='static-text'>
-                                <span id='last-word'></span>
-                            </div>
-                            <div class='static-text'>
-                                <p>Your guesses: </p>
-                                <span id="userGuess">(Press any key to guess!)</span>
-                                <h1 id='correct-guess'></h1>
-                            </div>
-                        </div>
-                    </div>
-                    <h2>Lives Remaining: <span id='lives-remaining'>7</span></h2>
-                    <h2>Wins: <span id='win-counter'>0</span></h2>
+                    <div class='static-text'>
+                        <p>Your word is: </p>
+                        <br>
+                        <span id='random-word'></span></div>
                 </div>
-                <button type='button' class='btn btn-danger' id='restart'>Click here to restart!</button>
+                <div class='col-lg-6'>
+                    <div class='static-text'>
+                        <span id='last-word'></span>
+                    </div>
+                    <div class='static-text'>
+                        <p>Your guesses: </p>
+                        <span id="userGuess">(Press any key to guess!)</span>
+                        <h1 id='correct-guess'></h1>
+                    </div>
+                </div>
+                <h2>Lives Remaining: <span id='lives-remaining'>7</span></h2>
+                <h2>Wins: <span id='win-counter'>0</span></h2>
             </div>
+            <button type='button' class='btn btn-danger' id='restart'>Click here to restart!</button>
         </div>
-
+        <!--End of Game-->
+        <div class="clearfix visible-xs-block"></div>
+        <!--Start of Footer-->
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted footer-style">&copy; Copyright 2017 Randy Lam.</p>
+            </div>
+        </footer>
+        <!--End of Footer-->
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="assets/javascript/game.js"></script>
 </body>
 

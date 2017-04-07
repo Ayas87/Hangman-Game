@@ -80,7 +80,7 @@ function blankBox() {
     for (j = 0; j < randomWord.length; j++) {
         if (randomWord[j].match(/[a-z]/)) {
             blank = document.createElement('span');
-            blank.innerHTML = '*';
+            blank.innerHTML = '_';
             blank.className = 'class_' + randomWord[j];
             displayRandomWord.appendChild(blank);
         } else {
